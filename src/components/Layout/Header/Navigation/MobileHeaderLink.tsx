@@ -7,18 +7,27 @@ import { motion, AnimatePresence } from "framer-motion";
 
 interface MobileHeaderLinkProps {
   item: HeaderItem;
+  onClick?: () => void;
 }
 
-const MobileHeaderLink = ({ item }: MobileHeaderLinkProps) => {
+const MobileHeaderLink = ({ item, onClick }: MobileHeaderLinkProps) => {
   const pathUrl = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = () => {
+    if (!item.submenu && onClick) {
+      onClick();
+    }
+  };
 
   return (
     <div className="py-2">
       <div className="flex items-center justify-between">
         <Link
           href={item.submenu ? "#" : item.href}
-          onClick={() => item.submenu && setIsOpen(!isOpen)}
+          onClick={() => {
+            item.submenu ? setIsOpen(!isOpen) : handleClick();
+          }}
           className={`text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary ${
             pathUrl === item.href ? "text-primary" : ""
           }`}
@@ -62,6 +71,7 @@ const MobileHeaderLink = ({ item }: MobileHeaderLinkProps) => {
                 <Link
                   key={index}
                   href={subItem.href}
+                  onClick={onClick}
                   className={`block py-2 text-sm text-dark hover:text-primary dark:text-white dark:hover:text-primary ${
                     pathUrl === subItem.href ? "text-primary" : ""
                   }`}

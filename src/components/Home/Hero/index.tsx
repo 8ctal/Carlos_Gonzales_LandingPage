@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const features = [
   {
@@ -22,8 +23,25 @@ const features = [
 ];
 
 const Hero = () => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     return (
-        <section id="home-section" className='bg-slateGray dark:bg-gray-900 pt-24 pb-16 sm:pt-32 sm:pb-20'>
+        <section 
+            id="home-section" 
+            className={`bg-slateGray dark:bg-gray-900 ${
+                isMobile ? 'pt-16' : 'pt-24'
+            } pb-16 sm:pt-32 sm:pb-20`}
+        >
             <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4">
                 <div className='grid grid-cols-1 lg:grid-cols-12 gap-8 items-center'>
                     <motion.div 

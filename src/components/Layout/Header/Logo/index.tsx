@@ -1,15 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const Logo: React.FC = () => {
+interface LogoProps {
+  smallVersion?: boolean;
+}
+
+const Logo: React.FC<LogoProps> = ({ smallVersion = false }) => {
   return (
-    <Link href="/">
+    <Link href="/" className={smallVersion ? "flex items-center justify-center" : ""}>
       <Image
         src="/images/logo/logo.png"
         alt="logo"
-        width={110}
-        height={60}
-        style={{ width: "auto", height: "auto" }}
+        width={smallVersion ? 40 : 110}
+        height={smallVersion ? 40 : 60}
+        style={{ 
+          width: "auto", 
+          height: "auto",
+          maxWidth: smallVersion ? "40px" : "110px"
+        }}
         quality={100}
       />
     </Link>
