@@ -1,0 +1,41 @@
+{
+  "name": "Dr. Carlos González - Médico Internista",
+  "short_name": "Dr. González",
+  "description": "Especialista en medicina interna, diagnóstico y tratamiento de enfermedades en adultos.",
+  "start_url": "/",
+  "id": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "browser"],
+  "background_color": "#ffffff",
+  "theme_color": "#497ff1",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.png",
+      "type": "image/png",
+      "sizes": "32x32",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-icon.png",
+      "type": "image/png",
+      "sizes": "180x180",
+      "purpose": "any"
+    }
+  ],
+  "orientation": "portrait",
+  "categories": ["medical", "healthcare"],
+  "lang": "es-CO",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "iarc_rating_id": "",
+  "screenshots": [],
+  "shortcuts": []
+} 
