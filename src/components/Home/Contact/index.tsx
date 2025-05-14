@@ -73,15 +73,15 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-semibold text-midnight_text dark:text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-midnight_text dark:text-white mb-4">
             Contáctame
           </h2>
-          <p className="text-black/70 dark:text-gray-300 text-lg max-w-2xl mx-auto">
+          <p className="text-black/70 dark:text-gray-300 text-base sm:text-lg max-w-2xl mx-auto px-4">
             Estoy aquí para atenderle. No dude en contactarme para agendar una cita o hacer una consulta
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
           {contactInfo.map((info, index) => (
             <motion.div
               key={index}
@@ -89,29 +89,29 @@ const Contact = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-lg text-center group"
+              className="bg-white dark:bg-gray-900 p-4 sm:p-6 rounded-2xl shadow-lg text-center group"
             >
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full mb-4 group-hover:bg-primary/20 dark:group-hover:bg-primary/30 transition-colors">
-                <Icon icon={info.icon} className="text-primary text-2xl" />
+              <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 dark:bg-primary/20 rounded-full mb-3 sm:mb-4 group-hover:bg-primary/20 dark:group-hover:bg-primary/30 transition-colors">
+                <Icon icon={info.icon} className="text-primary text-xl sm:text-2xl" />
               </div>
-              <h3 className="text-lg font-semibold text-midnight_text dark:text-white mb-2">
+              <h3 className="text-base sm:text-lg font-semibold text-midnight_text dark:text-white mb-2">
                 {info.title}
               </h3>
               <a 
                 href={info.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-black/70 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors inline-flex items-center justify-center gap-2 group"
+                className="text-sm sm:text-base text-black/70 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors inline-flex items-center justify-center gap-2 group"
               >
                 <span>{info.info}</span>
                 {info.title === "Dirección" && (
-                  <Icon icon="solar:map-arrow-right-bold" className="text-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <Icon icon="solar:map-arrow-right-bold" className="text-base sm:text-lg opacity-0 group-hover:opacity-100 transition-opacity" />
                 )}
                 {info.title === "Teléfono" && (
-                  <Icon icon="logos:whatsapp-icon" className="text-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <Icon icon="logos:whatsapp-icon" className="text-base sm:text-lg opacity-0 group-hover:opacity-100 transition-opacity" />
                 )}
                 {info.title === "Email" && (
-                  <Icon icon="solar:arrow-right-up-linear" className="text-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <Icon icon="solar:arrow-right-up-linear" className="text-base sm:text-lg opacity-0 group-hover:opacity-100 transition-opacity" />
                 )}
               </a>
             </motion.div>
@@ -123,29 +123,31 @@ const Contact = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12 px-4"
         >
-          <a
+          <motion.a
             href="https://www.doctoralia.co/carlos-alfonso-gonzalez-gomez-2/internista/bucaramanga?doctor_id=112456#/opinion"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-primary hover:text-secondary transition-colors duration-300"
+            className="inline-flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 bg-white dark:bg-gray-900 p-4 sm:p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group w-full sm:w-auto"
+            whileHover={{ y: -5 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <Icon icon="simple-icons:doctoralia" className="text-[#00B5DD] text-2xl" />
-            <span className="text-lg font-semibold text-midnight_text dark:text-white">Agenda en Doctoralia</span>
-            <Icon icon="solar:arrow-right-up-linear" className="text-primary text-xl" />
-          </a>
+            <Icon icon="simple-icons:doctoralia" className="text-[#00B5DD] text-2xl sm:text-3xl mb-2 sm:mb-0" />
+            <span className="text-lg sm:text-xl font-semibold text-midnight_text dark:text-white text-center sm:text-left">Agenda tu cita en Doctoralia</span>
+            <Icon icon="solar:arrow-right-up-linear" className="text-primary text-xl sm:text-2xl transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+          </motion.a>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg">
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <div className="bg-white dark:bg-gray-900 rounded-2xl p-4 sm:p-8 shadow-lg">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-midnight_text dark:text-white mb-2">
                     Nombre completo
@@ -238,20 +240,20 @@ const Contact = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md">
-              <h3 className="text-lg font-semibold text-midnight_text dark:text-white mb-4">
+            <div className="bg-white dark:bg-gray-900 p-4 sm:p-6 rounded-xl shadow-md">
+              <h3 className="text-base sm:text-lg font-semibold text-midnight_text dark:text-white mb-4">
                 Horario de atención
               </h3>
               <div className="space-y-3">
-                <div className="flex justify-between text-black/70 dark:text-gray-300">
+                <div className="flex justify-between text-sm sm:text-base text-black/70 dark:text-gray-300">
                   <span>Lunes - Viernes</span>
                   <span>9:00 AM - 6:00 PM</span>
                 </div>
-                <div className="flex justify-between text-black/70 dark:text-gray-300">
+                <div className="flex justify-between text-sm sm:text-base text-black/70 dark:text-gray-300">
                   <span>Sábado</span>
                   <span>9:00 AM - 2:00 PM</span>
                 </div>
-                <div className="flex justify-between text-black/70 dark:text-gray-300">
+                <div className="flex justify-between text-sm sm:text-base text-black/70 dark:text-gray-300">
                   <span>Domingo</span>
                   <span>Cerrado</span>
                 </div>

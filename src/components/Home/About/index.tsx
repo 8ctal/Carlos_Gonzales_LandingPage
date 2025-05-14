@@ -47,7 +47,7 @@ const About = () => {
                 <p className="text-midnight_text dark:text-white font-semibold">Certificada</p>
               </div>
               <p className="text-black/70 dark:text-gray-300 text-sm">
-                Experiencia enmedicina especializada
+                Experiencia en medicina especializada
               </p>
             </motion.div>
           </motion.div>
