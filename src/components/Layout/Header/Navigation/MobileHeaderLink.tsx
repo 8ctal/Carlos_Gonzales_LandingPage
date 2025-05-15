@@ -14,8 +14,11 @@ const MobileHeaderLink = ({ item, onClick }: MobileHeaderLinkProps) => {
   const pathUrl = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClick = () => {
-    if (!item.submenu && onClick) {
+  const handleLinkClick = (e: React.MouseEvent) => {
+    if (item.submenu) {
+      e.preventDefault();
+      setIsOpen(!isOpen);
+    } else if (onClick) {
       onClick();
     }
   };
@@ -23,20 +26,21 @@ const MobileHeaderLink = ({ item, onClick }: MobileHeaderLinkProps) => {
   return (
     <div className="py-2">
       <div className="flex items-center justify-between">
-        <Link
-          href={item.submenu ? "#" : item.href}
-          onClick={() => {
-            item.submenu ? setIsOpen(!isOpen) : handleClick();
-          }}
-          className={`text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary ${
+        <div
+          onClick={handleLinkClick}
+          className={`flex-1 text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary cursor-pointer ${
             pathUrl === item.href ? "text-primary" : ""
           }`}
         >
           {item.label}
-        </Link>
+        </div>
         {item.submenu && (
           <button
-            onClick={() => setIsOpen(!isOpen)}
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsOpen(!isOpen);
+            }}
             className="p-2 hover:bg-primary/10 rounded-full transition-colors duration-200"
           >
             <svg

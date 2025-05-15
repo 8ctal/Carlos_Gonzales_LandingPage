@@ -107,35 +107,82 @@ const Header = () => {
         </div>
       </motion.header>
 
-      {/* Mobile Floating Logo and Menu */}
+      {/* Mobile Header */}
       {isMobile && (
         <>
-          {/* Floating Logo */}
-          <motion.div 
-            className="fixed bottom-4 left-4 z-50 md:hidden"
-            initial={{ scale: 1, opacity: 1 }}
+          {/* Mobile Header - Initial State (Same as Desktop) */}
+          <motion.header
+            initial={{ y: 0, opacity: 1 }}
             animate={{ 
-              scale: sticky ? 0.85 : 1,
-              opacity: 1
+              y: 0,
+              opacity: sticky ? 0 : 1
+            }}
+            transition={{ duration: 0.3 }}
+            className="fixed top-0 z-40 w-full transition-all duration-300 bg-white dark:bg-gray-900 md:hidden"
+          >
+            <div className="container mx-auto px-4 py-3">
+              <div className="relative flex items-center justify-between">
+                <div className="w-48 max-w-full">
+                  <Logo />
+                </div>
+                
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                    className="p-2 hover:bg-primary/10 rounded-full transition-colors duration-200 text-dark dark:text-white"
+                    aria-label="Toggle dark mode"
+                  >
+                    {theme === "dark" ? (
+                      <Icon icon="solar:sun-2-bold" className="text-xl" />
+                    ) : (
+                      <Icon icon="solar:moon-bold" className="text-xl" />
+                    )}
+                  </button>
+                  
+                  <button
+                    onClick={() => setNavbarOpen(!navbarOpen)}
+                    className="p-2 hover:bg-primary/10 rounded-full transition-colors duration-200 text-dark dark:text-white"
+                  >
+                    <Icon
+                      icon={navbarOpen ? "solar:close-circle-bold" : "solar:menu-dots-bold"}
+                      className="text-xl"
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </motion.header>
+
+          {/* Floating Logo - Appears on Scroll */}
+          <motion.div 
+            className="fixed top-4 left-4 z-50 md:hidden"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ 
+              scale: sticky ? 1 : 0,
+              opacity: sticky ? 1 : 0
             }}
             transition={{ duration: 0.3 }}
           >
             <Link href="/" className="block">
-              <div className="w-14 h-14 bg-white dark:bg-gray-900 rounded-full shadow-lg flex items-center justify-center overflow-hidden border-2 border-primary transition-all duration-300">
+              <div className="w-14 h-14 bg-white dark:bg-gray-900 rounded-lg shadow-lg flex items-center justify-center overflow-hidden border-2 border-primary transition-all duration-300">
                 <Logo smallVersion={true} />
               </div>
             </Link>
           </motion.div>
 
-          {/* Menu Button */}
+          {/* Menu Button - Only visible when scrolled */}
           <motion.div 
             className="fixed top-4 right-4 z-50 md:hidden"
-            initial={{ y: 0 }}
-            animate={{ y: 0 }}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ 
+              scale: sticky ? 1 : 0,
+              opacity: sticky ? 1 : 0
+            }}
+            transition={{ duration: 0.3 }}
           >
             <button
               onClick={() => setNavbarOpen(!navbarOpen)}
-              className="w-10 h-10 bg-white dark:bg-gray-900 rounded-full shadow-lg flex items-center justify-center border border-gray-200 dark:border-gray-700"
+              className="w-10 h-10 bg-white dark:bg-gray-900 rounded-lg shadow-lg flex items-center justify-center border border-gray-200 dark:border-gray-700"
             >
               <Icon
                 icon={navbarOpen ? "solar:close-circle-bold" : "solar:menu-dots-bold"}
@@ -144,15 +191,19 @@ const Header = () => {
             </button>
           </motion.div>
 
-          {/* Dark Mode Toggle */}
+          {/* Dark Mode Toggle - Only visible when scrolled */}
           <motion.div 
             className="fixed top-4 right-20 z-50 md:hidden"
-            initial={{ y: 0 }}
-            animate={{ y: 0 }}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ 
+              scale: sticky ? 1 : 0,
+              opacity: sticky ? 1 : 0
+            }}
+            transition={{ duration: 0.3 }}
           >
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="w-10 h-10 bg-white dark:bg-gray-900 rounded-full shadow-lg flex items-center justify-center border border-gray-200 dark:border-gray-700"
+              className="w-10 h-10 bg-white dark:bg-gray-900 rounded-lg shadow-lg flex items-center justify-center border border-gray-200 dark:border-gray-700"
               aria-label="Toggle dark mode"
             >
               {theme === "dark" ? (
@@ -171,7 +222,7 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.2 }}
-                className="fixed top-16 right-4 w-64 p-4 rounded-lg bg-white dark:bg-gray-900 shadow-lg md:hidden z-50"
+                className="fixed top-16 right-4 w-64 max-w-[calc(100vw-2rem)] p-4 rounded-lg bg-white dark:bg-gray-900 shadow-lg md:hidden z-50"
               >
                 <div className="space-y-2">
                   {headerData.map((item, index) => (

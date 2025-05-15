@@ -58,3 +58,30 @@ section {
 .slick-dots li button:before {
   font-size: 11px !important;
 }
+
+html {
+  overflow-x: hidden !important;
+}
+
+body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  position: relative !important;
+}
+
+#root {
+  overflow-x: hidden !important;
+}
+
+/* Asegurarse que los contenedores principales no causen overflow */
+.container {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+@media (max-width: 768px) {
+  html, body {
+    touch-action: pan-y !important;
+  }
+}

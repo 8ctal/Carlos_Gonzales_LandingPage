@@ -44,16 +44,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning className="scroll-smooth">
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} antialiased overflow-x-hidden`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen flex-col bg-white transition-colors duration-300 dark:bg-gray-900">
+          <div className="relative flex min-h-screen flex-col bg-white transition-colors duration-300 dark:bg-gray-900 overflow-x-hidden">
             <Header />
-            <main className="flex-grow">
+            <main className="flex-grow overflow-x-hidden">
               {children}
             </main>
             <Footer />

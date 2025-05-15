@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { useTheme } from "next-themes";
 
 interface LogoProps {
   smallVersion?: boolean;
@@ -16,7 +18,8 @@ const Logo: React.FC<LogoProps> = ({ smallVersion = false }) => {
         style={{ 
           width: "auto", 
           height: "auto",
-          maxWidth: smallVersion ? "40px" : "110px"
+          maxWidth: smallVersion ? "40px" : "110px",
+          objectFit: "contain"
         }}
         quality={100}
       />

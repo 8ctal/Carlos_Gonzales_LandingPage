@@ -16,7 +16,7 @@ const services = [
     title: "Especialidades",
     description: "Atención especializada en diferentes áreas de la medicina para un cuidado completo.",
     id: "specialties",
-    details: "Contamos con especialistas en cardiología, neurología, endocrinología y otras áreas para brindarle la atención específica que necesita."
+    details: "Contamos con ... áreas para brindarle la atención específica que necesita."
   },
   {
     icon: "solar:hospital-bold",
