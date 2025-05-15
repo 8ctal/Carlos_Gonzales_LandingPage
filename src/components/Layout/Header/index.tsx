@@ -76,8 +76,8 @@ const Header = () => {
           height: sticky ? 'auto' : 'auto'
         }}
         transition={{ duration: 0.3 }}
-        className={`fixed top-0 z-40 w-full transition-all duration-300 bg-white dark:bg-gray-900 md:block ${
-          sticky ? "shadow-lg py-2" : "py-3"
+        className={`fixed top-0 z-40 w-full transition-all duration-300 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm md:block ${
+          sticky ? "shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)] py-2" : "py-3"
         } ${isMobile ? "hidden" : ""}`}
       >
         <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4">
@@ -118,7 +118,7 @@ const Header = () => {
               opacity: sticky ? 0 : 1
             }}
             transition={{ duration: 0.3 }}
-            className="fixed top-0 z-40 w-full transition-all duration-300 bg-white dark:bg-gray-900 md:hidden"
+            className="fixed top-0 z-40 w-full transition-all duration-300 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm md:hidden shadow-[0_4px_20px_rgb(0,0,0,0.08)] dark:shadow-[0_4px_20px_rgb(0,0,0,0.2)]"
           >
             <div className="container mx-auto px-4 py-3">
               <div className="relative flex items-center justify-between">
