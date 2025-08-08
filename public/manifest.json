@@ -2,7 +2,7 @@
   "name": "Dr. Carlos González - Médico Internista",
   "short_name": "Dr. González",
   "description": "Especialista en medicina interna, diagnóstico y tratamiento de enfermedades en adultos.",
-  "start_url": "/",
+  "start_url": "https://www.drcarlosgonzalez.com",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#497ff1",

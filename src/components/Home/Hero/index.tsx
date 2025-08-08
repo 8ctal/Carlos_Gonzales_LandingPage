@@ -85,7 +85,7 @@ const Hero = () => {
                                         className="w-full h-full"
                                     />
                                     {/* Overlay más fuerte para mejor legibilidad */}
-                                    <div className="absolute inset-0 bg-black/40 dark:bg-black/50" />
+                                    <div className="absolute inset-0 bg-black/60 md:bg-black/40 dark:bg-black/60 md:dark:bg-black/50" />
                                 </div>
                             </div>
                         ))}
@@ -144,7 +144,7 @@ const Hero = () => {
                     <motion.div 
                         className={`flex flex-col gap-4 sm:gap-6 transition-all duration-1000 ease-in-out ${
                             currentSlide === 0 
-                                ? 'lg:col-span-6 order-2 lg:order-1 text-center lg:text-start' 
+                                ? 'order-1 lg:col-span-6 lg:order-1 text-center lg:text-start' 
                                 : 'text-center max-w-3xl mx-auto'
                         }`}
                         initial={{ opacity: 0, x: -50 }}
@@ -154,7 +154,7 @@ const Hero = () => {
                         }}
                         transition={{ duration: 0.8 }}
                     >
-                        <div className={`flex gap-2 mt-4 lg:mt-0 flex-wrap transition-all duration-1000 ease-in-out ${
+                        <div className={`flex gap-2 mt-11 lg:mt-0 md:mt-5 flex-wrap transition-all duration-1000 ease-in-out ${
                             currentSlide === 0 
                                 ? 'justify-center lg:justify-start' 
                                 : 'justify-center'
@@ -281,7 +281,7 @@ const Hero = () => {
                                 <Icon icon="solar:star-bold" className="text-yellow-400 text-xl" />
                             </div>
                             <p className="text-sm sm:text-base text-midnight_text dark:text-white">
-                                4.9 de 5 en Doctoralia · 120+ opiniones
+                                5 en Doctoralia · 100+ opiniones
                             </p>
                         </motion.div>
                         
@@ -315,7 +315,7 @@ const Hero = () => {
                     {/* Imagen del doctor - solo se muestra en el primer slide con transición suave */}
                     {currentSlide === 0 && (
                         <motion.div 
-                            className='lg:col-span-6 order-1 lg:order-2 relative'
+                            className='order-2 lg:col-span-6 lg:order-2 relative'
                             initial={{ opacity: 0, scale: 0.8, x: 50 }}
                             animate={{ 
                                 opacity: 1, 

@@ -7,7 +7,7 @@ import Contact from "@/components/Home/Contact";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Inicio',
+  title: 'Dr. Carlos González - Médico Internista',
 };
 
 export default function Home() {

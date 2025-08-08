@@ -125,8 +125,8 @@ const Header = () => {
       >
         <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4">
           <div className="relative flex items-center justify-between" ref={navbarRef}>
-            <div className={`${sticky ? "w-44" : "w-52"} max-w-full transition-all duration-300`}>
-              <Logo />
+            <div className={`${sticky ? "w-44" : "w-52"} max-w-full transition-all duration-300`}> 
+              {isAtTop ? <Logo /> : <Logo smallVersion = {true} />}
             </div>
             
             <div className="hidden lg:flex items-center gap-6">
@@ -218,7 +218,7 @@ const Header = () => {
           >
             <Link href="/" className="block">
               <div className="w-12 h-12 bg-white dark:bg-gray-900 rounded-lg shadow-lg flex items-center justify-center overflow-hidden border-2 border-primary transition-all duration-300">
-                <Logo smallVersion={true} />
+                <Logo smallVersion={true} version={1}/>
               </div>
             </Link>
           </motion.div>
@@ -331,7 +331,7 @@ const Header = () => {
 
       {/* WhatsApp Floating Button */}
       <motion.div
-        className="fixed bottom-6 right-20 z-50"
+        className="fixed bottom-6 right-10 z-50"
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 1, duration: 0.5, type: "spring" }}
