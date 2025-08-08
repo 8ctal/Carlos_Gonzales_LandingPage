@@ -29,27 +29,14 @@ const stats = [
 ];
 
 const backgroundSlides = [
-  "/images/newsletter/bgFile.png",
+  "/images/newsletter/bgg.png",
   "/images/newsletter/bgFile.png",
   "/images/newsletter/bgg.png",
 ];
 
-const sliderSettings = {
-  dots: false,
-  arrows: false,
-  infinite: true,
-  autoplay: true,
-  autoplaySpeed: 5000,
-  speed: 1000,
-  fade: true,
-  pauseOnHover: false,
-  pauseOnFocus: false,
-  cssEase: "ease-in-out",
-  draggable: false,
-};
-
 const Hero = () => {
     const [isMobile, setIsMobile] = useState(false);
+    const [currentSlide, setCurrentSlide] = useState(0);
 
     useEffect(() => {
         const checkMobile = () => {
@@ -60,6 +47,21 @@ const Hero = () => {
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
+
+    const sliderSettings = {
+        dots: false,
+        arrows: false,
+        infinite: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        speed: 1000,
+        fade: true,
+        pauseOnHover: false,
+        pauseOnFocus: false,
+        cssEase: "ease-in-out",
+        draggable: false,
+        beforeChange: (current: number, next: number) => setCurrentSlide(next),
+    };
 
     return (
         <section 
@@ -82,8 +84,8 @@ const Hero = () => {
                                         style={{ objectFit: 'cover', objectPosition: 'center' }}
                                         className="w-full h-full"
                                     />
-                                    {/* Overlay for readability */}
-                                    <div className="absolute inset-0 bg-black/20 dark:bg-black/50" />
+                                    {/* Overlay con menor opacidad */}
+                                    <div className="absolute inset-0 bg-black/10 dark:bg-black/30" />
                                 </div>
                             </div>
                         ))}
@@ -134,14 +136,29 @@ const Hero = () => {
             <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/5 to-transparent dark:from-black/20 pointer-events-none z-20" />
 
             <div className="container relative mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4 py-20 z-20">
-                <div className='grid grid-cols-1 lg:grid-cols-12 gap-8 items-center'>
+                <div className={`grid gap-8 items-center transition-all duration-1000 ease-in-out ${
+                    currentSlide === 0 
+                        ? 'grid-cols-1 lg:grid-cols-12' 
+                        : 'grid-cols-1 justify-center max-w-4xl mx-auto'
+                }`}>
                     <motion.div 
-                        className='lg:col-span-6 flex flex-col gap-4 sm:gap-6 order-2 lg:order-1'
+                        className={`flex flex-col gap-4 sm:gap-6 transition-all duration-1000 ease-in-out ${
+                            currentSlide === 0 
+                                ? 'lg:col-span-6 order-2 lg:order-1 text-center lg:text-start' 
+                                : 'text-center'
+                        }`}
                         initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
+                        animate={{ 
+                            opacity: 1, 
+                            x: 0,
+                        }}
                         transition={{ duration: 0.8 }}
                     >
-                        <div className='flex gap-2 justify-center lg:justify-start mt-4 lg:mt-0 flex-wrap'>
+                        <div className={`flex gap-2 mt-4 lg:mt-0 flex-wrap transition-all duration-1000 ease-in-out ${
+                            currentSlide === 0 
+                                ? 'justify-center lg:justify-start' 
+                                : 'justify-center'
+                        }`}>
                             <motion.div
                                 initial={{ scale: 0 }}
                                 animate={{ scale: 1 }}
@@ -179,7 +196,9 @@ const Hero = () => {
                                 <p className='text-midnight_text dark:text-white text-sm font-medium'>Citas disponibles esta semana</p>
                             </motion.div>
                         </div>
-                        <div className="space-y-3 text-center lg:text-start">
+                        <div className={`space-y-3 transition-all duration-1000 ease-in-out ${
+                            currentSlide === 0 ? 'text-center lg:text-start' : 'text-center'
+                        }`}>
                             <motion.h1 
                                 className='text-midnight_text dark:text-white text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight'
                                 initial={{ opacity: 0, y: 20 }}
@@ -207,7 +226,9 @@ const Hero = () => {
                         </div>
 
                         <motion.div 
-                            className="relative pt-4 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start"
+                            className={`relative pt-4 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 transition-all duration-1000 ease-in-out ${
+                                currentSlide === 0 ? 'justify-center lg:justify-start' : 'justify-center'
+                            }`}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.6 }}
@@ -240,7 +261,9 @@ const Hero = () => {
 
                         {/* Doctoralia Rating Strip */}
                         <motion.div
-                            className="flex items-center justify-center lg:justify-start gap-3 bg-white/80 dark:bg-gray-800/80 p-3 sm:p-4 rounded-xl backdrop-blur-sm shadow-lg border border-gray-100 dark:border-gray-700 mt-2"
+                            className={`flex items-center gap-3 bg-white/80 dark:bg-gray-800/80 p-3 sm:p-4 rounded-xl backdrop-blur-sm shadow-lg border border-gray-100 dark:border-gray-700 mt-2 transition-all duration-1000 ease-in-out ${
+                                currentSlide === 0 ? 'justify-center lg:justify-start' : 'justify-center'
+                            }`}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.7 }}
@@ -282,44 +305,57 @@ const Hero = () => {
                             ))}
                         </div>
                     </motion.div>
-                    <motion.div 
-                        className='lg:col-span-6 order-1 lg:order-2 relative'
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <div className="relative w-full max-w-[600px] mx-auto lg:max-w-[800px] xl:max-w-none aspect-[3/4] translate-y-4 lg:translate-y-0">
-                            <motion.div
-                                initial={{ scale: 1 }}
-                                animate={{ scale: 1.05 }}
-                                transition={{ 
-                                    duration: 20,
-                                    repeat: Infinity,
-                                    repeatType: "reverse",
-                                    ease: "linear"
-                                }}
-                                className="relative w-full h-full"
-                            >
-                                {/* Sutil resplandor detrás de la imagen */}
-                                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent dark:via-primary/10 rounded-full blur-2xl transform scale-110" />
-                                
-                                {/* Imagen principal */}
-                                <div className="relative w-full h-full lg:scale-125 lg:translate-y-8">
-                                    <Image 
-                                        src="/images/banner/newBanner-Photoroom.png" 
-                                        alt="Dr. Carlos González - Médico Internista" 
-                                        fill
-                                        priority
-                                        style={{
-                                            objectFit: 'contain',
-                                            objectPosition: 'center 100%'
-                                        }}
-                                        className="select-none"
-                                    />
-                                </div>
-                            </motion.div>
-                        </div>
-                    </motion.div>
+                    
+                    {/* Imagen del doctor - solo se muestra en el primer slide con transición suave */}
+                    {currentSlide === 0 && (
+                        <motion.div 
+                            className='lg:col-span-6 order-1 lg:order-2 relative'
+                            initial={{ opacity: 0, scale: 0.8, x: 50 }}
+                            animate={{ 
+                                opacity: 1, 
+                                scale: 1,
+                                x: 0
+                            }}
+                            exit={{ 
+                                opacity: 0, 
+                                scale: 0.8,
+                                x: 50
+                            }}
+                            transition={{ duration: 1, ease: "easeInOut" }}
+                        >
+                            <div className="relative w-full max-w-[600px] mx-auto lg:max-w-[800px] xl:max-w-none aspect-[3/4] translate-y-4 lg:translate-y-0">
+                                <motion.div
+                                    initial={{ scale: 1 }}
+                                    animate={{ scale: 1.05 }}
+                                    transition={{ 
+                                        duration: 20,
+                                        repeat: Infinity,
+                                        repeatType: "reverse",
+                                        ease: "linear"
+                                    }}
+                                    className="relative w-full h-full"
+                                >
+                                    {/* Sutil resplandor detrás de la imagen */}
+                                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent dark:via-primary/10 rounded-full blur-2xl transform scale-110" />
+                                    
+                                    {/* Imagen principal */}
+                                    <div className="relative w-full h-full lg:scale-125 lg:translate-y-8">
+                                        <Image 
+                                            src="/images/banner/newBanner-Photoroom.png" 
+                                            alt="Dr. Carlos González - Médico Internista" 
+                                            fill
+                                            priority
+                                            style={{
+                                                objectFit: 'contain',
+                                                objectPosition: 'center 100%'
+                                            }}
+                                            className="select-none"
+                                        />
+                                    </div>
+                                </motion.div>
+                            </div>
+                        </motion.div>
+                    )}
                 </div>
             </div>
         </section>
