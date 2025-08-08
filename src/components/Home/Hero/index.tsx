@@ -29,9 +29,9 @@ const stats = [
 ];
 
 const backgroundSlides = [
-  "/images/newsletter/bgg.png",
+  "/images/newsletter/slide1.png",
+  "/images/newsletter/slide2.png",
   "/images/newsletter/bgFile.png",
-  "/images/newsletter/bgg.png",
 ];
 
 const Hero = () => {

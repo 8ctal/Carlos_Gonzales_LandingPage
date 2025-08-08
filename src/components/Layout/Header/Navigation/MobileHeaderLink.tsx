@@ -14,11 +14,54 @@ const MobileHeaderLink = ({ item, onClick }: MobileHeaderLinkProps) => {
   const pathUrl = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleLinkClick = (e: React.MouseEvent) => {
+  const scrollToSection = (href: string) => {
+    if (href.startsWith('#')) {
+      const element = document.querySelector(href);
+      if (element) {
+        const headerHeight = 80; // Altura aproximada del header
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - headerHeight;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    } else if (href.includes('#')) {
+      const [path, hash] = href.split('#');
+      if (path === pathUrl || path === '/') {
+        const element = document.querySelector(`#${hash}`);
+        if (element) {
+          const headerHeight = 80; // Altura aproximada del header
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - headerHeight;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    }
+  };
+
+  const handleLinkClick = (e: React.MouseEvent, href: string) => {
     if (item.submenu) {
       e.preventDefault();
       setIsOpen(!isOpen);
-    } else if (onClick) {
+    } else {
+      e.preventDefault();
+      scrollToSection(href);
+      if (onClick) {
+        onClick();
+      }
+    }
+  };
+
+  const handleSubmenuClick = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    scrollToSection(href);
+    if (onClick) {
       onClick();
     }
   };
@@ -27,7 +70,7 @@ const MobileHeaderLink = ({ item, onClick }: MobileHeaderLinkProps) => {
     <div className="py-1">
       <div className="flex items-center justify-between">
         <div
-          onClick={handleLinkClick}
+          onClick={(e) => handleLinkClick(e, item.href)}
           className={`flex-1 text-lg font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary cursor-pointer transition-colors duration-200 ${
             pathUrl === item.href ? "text-primary" : ""
           }`}
@@ -72,16 +115,15 @@ const MobileHeaderLink = ({ item, onClick }: MobileHeaderLinkProps) => {
           >
             <div className="mt-3 ml-4 space-y-3">
               {item.submenu.map((subItem, index) => (
-                <Link
+                <div
                   key={index}
-                  href={subItem.href}
-                  onClick={onClick}
-                  className={`block py-2 text-base text-dark hover:text-primary dark:text-white dark:hover:text-primary transition-colors duration-200 ${
+                  onClick={(e) => handleSubmenuClick(e, subItem.href)}
+                  className={`block py-2 text-base text-dark hover:text-primary dark:text-white dark:hover:text-primary transition-colors duration-200 cursor-pointer ${
                     pathUrl === subItem.href ? "text-primary" : ""
                   }`}
                 >
                   {subItem.label}
-                </Link>
+                </div>
               ))}
             </div>
           </motion.div>

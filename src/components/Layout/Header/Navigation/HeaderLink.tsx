@@ -13,15 +13,61 @@ const HeaderLink = ({ item }: HeaderLinkProps) => {
   const pathUrl = usePathname();
   const [isHovered, setIsHovered] = useState(false);
 
+  const scrollToSection = (href: string) => {
+    if (href.startsWith('#')) {
+      const element = document.querySelector(href);
+      if (element) {
+        const headerHeight = 80; // Altura aproximada del header
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - headerHeight;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    } else if (href.includes('#')) {
+      const [path, hash] = href.split('#');
+      if (path === pathUrl || path === '/') {
+        const element = document.querySelector(`#${hash}`);
+        if (element) {
+          const headerHeight = 80; // Altura aproximada del header
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - headerHeight;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    }
+  };
+
+  const handleLinkClick = (e: React.MouseEvent, href: string) => {
+    if (item.submenu) {
+      // Don't prevent default for submenu items, let them work normally
+      return;
+    } else {
+      e.preventDefault();
+      scrollToSection(href);
+    }
+  };
+
+  const handleSubmenuClick = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    scrollToSection(href);
+  };
+
   return (
     <div 
       className="relative group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Link
-        href={item.href}
-        className={`flex py-2 text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary ${
+      <div
+        onClick={(e) => handleLinkClick(e, item.href)}
+        className={`flex py-2 text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary cursor-pointer ${
           pathUrl === item.href ? "text-primary" : ""
         }`}
       >
@@ -42,7 +88,7 @@ const HeaderLink = ({ item }: HeaderLinkProps) => {
             />
           </svg>
         )}
-      </Link>
+      </div>
       
       <AnimatePresence>
         {item.submenu && isHovered && (
@@ -55,16 +101,16 @@ const HeaderLink = ({ item }: HeaderLinkProps) => {
           >
             <div className="py-1" role="menu" aria-orientation="vertical">
               {item.submenu.map((subItem, index) => (
-                <Link
+                <div
                   key={index}
-                  href={subItem.href}
-                  className={`block px-4 py-2 text-sm text-dark hover:bg-primary/10 hover:text-primary dark:text-white dark:hover:text-primary ${
+                  onClick={(e) => handleSubmenuClick(e, subItem.href)}
+                  className={`block px-4 py-2 text-sm text-dark hover:bg-primary/10 hover:text-primary dark:text-white dark:hover:text-primary cursor-pointer ${
                     pathUrl === subItem.href ? "bg-primary/10 text-primary" : ""
                   }`}
                   role="menuitem"
                 >
                   {subItem.label}
-                </Link>
+                </div>
               ))}
             </div>
           </motion.div>
