@@ -64,6 +64,19 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (navbarOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [navbarOpen]);
+
   if (!mounted) return null;
 
   return (
@@ -77,12 +90,12 @@ const Header = () => {
         }}
         transition={{ duration: 0.3 }}
         className={`fixed top-0 z-40 w-full transition-all duration-300 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm md:block ${
-          sticky ? "shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)] py-2" : "py-3"
+          sticky ? "shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)] py-1" : "py-2"
         } ${isMobile ? "hidden" : ""}`}
       >
         <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4">
           <div className="relative flex items-center justify-between" ref={navbarRef}>
-            <div className={`${sticky ? "w-48" : "w-56"} max-w-full transition-all duration-300`}>
+            <div className={`${sticky ? "w-44" : "w-52"} max-w-full transition-all duration-300`}>
               <Logo />
             </div>
             
@@ -97,9 +110,9 @@ const Header = () => {
                 aria-label="Toggle dark mode"
               >
                 {theme === "dark" ? (
-                  <Icon icon="solar:sun-2-bold" className={`${sticky ? "text-xl" : "text-2xl"} transition-all duration-300`} />
+                  <Icon icon="solar:sun-2-bold" className={`${sticky ? "text-lg" : "text-xl"} transition-all duration-300`} />
                 ) : (
-                  <Icon icon="solar:moon-bold" className={`${sticky ? "text-xl" : "text-2xl"} transition-all duration-300`} />
+                  <Icon icon="solar:moon-bold" className={`${sticky ? "text-lg" : "text-xl"} transition-all duration-300`} />
                 )}
               </button>
             </div>
@@ -120,9 +133,9 @@ const Header = () => {
             transition={{ duration: 0.3 }}
             className="fixed top-0 z-40 w-full transition-all duration-300 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm md:hidden shadow-[0_4px_20px_rgb(0,0,0,0.08)] dark:shadow-[0_4px_20px_rgb(0,0,0,0.2)]"
           >
-            <div className="container mx-auto px-4 py-3">
+            <div className="container mx-auto px-4 py-2">
               <div className="relative flex items-center justify-between">
-                <div className="w-48 max-w-full">
+                <div className="w-44 max-w-full">
                   <Logo />
                 </div>
                 
@@ -133,9 +146,9 @@ const Header = () => {
                     aria-label="Toggle dark mode"
                   >
                     {theme === "dark" ? (
-                      <Icon icon="solar:sun-2-bold" className="text-xl" />
+                      <Icon icon="solar:sun-2-bold" className="text-lg" />
                     ) : (
-                      <Icon icon="solar:moon-bold" className="text-xl" />
+                      <Icon icon="solar:moon-bold" className="text-lg" />
                     )}
                   </button>
                   
@@ -145,7 +158,7 @@ const Header = () => {
                   >
                     <Icon
                       icon={navbarOpen ? "solar:close-circle-bold" : "solar:menu-dots-bold"}
-                      className="text-xl"
+                      className="text-lg"
                     />
                   </button>
                 </div>
@@ -155,7 +168,7 @@ const Header = () => {
 
           {/* Floating Logo - Appears on Scroll */}
           <motion.div 
-            className="fixed top-4 left-4 z-50 md:hidden"
+            className="fixed top-3 left-3 z-50 md:hidden"
             initial={{ scale: 0, opacity: 0 }}
             animate={{ 
               scale: sticky ? 1 : 0,
@@ -164,7 +177,7 @@ const Header = () => {
             transition={{ duration: 0.3 }}
           >
             <Link href="/" className="block">
-              <div className="w-14 h-14 bg-white dark:bg-gray-900 rounded-lg shadow-lg flex items-center justify-center overflow-hidden border-2 border-primary transition-all duration-300">
+              <div className="w-12 h-12 bg-white dark:bg-gray-900 rounded-lg shadow-lg flex items-center justify-center overflow-hidden border-2 border-primary transition-all duration-300">
                 <Logo smallVersion={true} />
               </div>
             </Link>
@@ -172,7 +185,7 @@ const Header = () => {
 
           {/* Menu Button - Only visible when scrolled */}
           <motion.div 
-            className="fixed top-4 right-4 z-50 md:hidden"
+            className="fixed top-3 right-3 z-50 md:hidden"
             initial={{ scale: 0, opacity: 0 }}
             animate={{ 
               scale: sticky ? 1 : 0,
@@ -182,18 +195,18 @@ const Header = () => {
           >
             <button
               onClick={() => setNavbarOpen(!navbarOpen)}
-              className="w-10 h-10 bg-white dark:bg-gray-900 rounded-lg shadow-lg flex items-center justify-center border border-gray-200 dark:border-gray-700"
+              className="w-9 h-9 bg-white dark:bg-gray-900 rounded-lg shadow-lg flex items-center justify-center border border-gray-200 dark:border-gray-700"
             >
               <Icon
                 icon={navbarOpen ? "solar:close-circle-bold" : "solar:menu-dots-bold"}
-                className="text-xl text-dark dark:text-white"
+                className="text-lg text-dark dark:text-white"
               />
             </button>
           </motion.div>
 
           {/* Dark Mode Toggle - Only visible when scrolled */}
           <motion.div 
-            className="fixed top-4 right-20 z-50 md:hidden"
+            className="fixed top-3 right-16 z-50 md:hidden"
             initial={{ scale: 0, opacity: 0 }}
             animate={{ 
               scale: sticky ? 1 : 0,
@@ -203,33 +216,74 @@ const Header = () => {
           >
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="w-10 h-10 bg-white dark:bg-gray-900 rounded-lg shadow-lg flex items-center justify-center border border-gray-200 dark:border-gray-700"
+              className="w-9 h-9 bg-white dark:bg-gray-900 rounded-lg shadow-lg flex items-center justify-center border border-gray-200 dark:border-gray-700"
               aria-label="Toggle dark mode"
             >
               {theme === "dark" ? (
-                <Icon icon="solar:sun-2-bold" className="text-xl" />
+                <Icon icon="solar:sun-2-bold" className="text-lg" />
               ) : (
-                <Icon icon="solar:moon-bold" className="text-xl" />
+                <Icon icon="solar:moon-bold" className="text-lg" />
               )}
             </button>
           </motion.div>
 
-          {/* Mobile Menu */}
+          {/* Full Screen Mobile Menu */}
           <AnimatePresence>
             {navbarOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.2 }}
-                className="fixed top-16 right-4 w-64 max-w-[calc(100vw-2rem)] p-4 rounded-lg bg-white dark:bg-gray-900 shadow-lg md:hidden z-50"
-              >
-                <div className="space-y-2">
-                  {headerData.map((item, index) => (
-                    <MobileHeaderLink key={index} item={item} onClick={() => setNavbarOpen(false)} />
-                  ))}
-                </div>
-              </motion.div>
+              <>
+                {/* Backdrop */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+                  onClick={() => setNavbarOpen(false)}
+                />
+                
+                {/* Menu Content */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className="fixed inset-0 z-50 flex items-center justify-center md:hidden"
+                >
+                  <div className="w-full max-w-sm mx-6 p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl">
+                    <div className="text-center mb-8">
+                      <h2 className="text-2xl font-bold text-dark dark:text-white mb-2">
+                        Menú
+                      </h2>
+                      <div className="w-16 h-1 bg-primary mx-auto rounded-full"></div>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      {headerData.map((item, index) => (
+                        <MobileHeaderLink key={index} item={item} onClick={() => setNavbarOpen(false)} />
+                      ))}
+                    </div>
+                    
+                    <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                      <div className="flex items-center justify-center gap-4">
+                        <span className="text-sm text-gray-600 dark:text-gray-400">
+                          Tema:
+                        </span>
+                        <button
+                          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                          className="p-3 hover:bg-primary/10 rounded-full transition-colors duration-200 text-dark dark:text-white"
+                          aria-label="Toggle dark mode"
+                        >
+                          {theme === "dark" ? (
+                            <Icon icon="solar:sun-2-bold" className="text-xl" />
+                          ) : (
+                            <Icon icon="solar:moon-bold" className="text-xl" />
+                          )}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </>
             )}
           </AnimatePresence>
         </>

@@ -24,11 +24,11 @@ const MobileHeaderLink = ({ item, onClick }: MobileHeaderLinkProps) => {
   };
 
   return (
-    <div className="py-2">
+    <div className="py-1">
       <div className="flex items-center justify-between">
         <div
           onClick={handleLinkClick}
-          className={`flex-1 text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary cursor-pointer ${
+          className={`flex-1 text-lg font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary cursor-pointer transition-colors duration-200 ${
             pathUrl === item.href ? "text-primary" : ""
           }`}
         >
@@ -70,13 +70,13 @@ const MobileHeaderLink = ({ item, onClick }: MobileHeaderLinkProps) => {
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="mt-2 ml-4 space-y-2">
+            <div className="mt-3 ml-4 space-y-3">
               {item.submenu.map((subItem, index) => (
                 <Link
                   key={index}
                   href={subItem.href}
                   onClick={onClick}
-                  className={`block py-2 text-sm text-dark hover:text-primary dark:text-white dark:hover:text-primary ${
+                  className={`block py-2 text-base text-dark hover:text-primary dark:text-white dark:hover:text-primary transition-colors duration-200 ${
                     pathUrl === subItem.href ? "text-primary" : ""
                   }`}
                 >
