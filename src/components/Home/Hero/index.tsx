@@ -84,8 +84,8 @@ const Hero = () => {
                                         style={{ objectFit: 'cover', objectPosition: 'center' }}
                                         className="w-full h-full"
                                     />
-                                    {/* Overlay con menor opacidad */}
-                                    <div className="absolute inset-0 bg-black/10 dark:bg-black/30" />
+                                    {/* Overlay más fuerte para mejor legibilidad */}
+                                    <div className="absolute inset-0 bg-black/40 dark:bg-black/50" />
                                 </div>
                             </div>
                         ))}
@@ -145,7 +145,7 @@ const Hero = () => {
                         className={`flex flex-col gap-4 sm:gap-6 transition-all duration-1000 ease-in-out ${
                             currentSlide === 0 
                                 ? 'lg:col-span-6 order-2 lg:order-1 text-center lg:text-start' 
-                                : 'text-center'
+                                : 'text-center max-w-3xl mx-auto'
                         }`}
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ 
@@ -200,7 +200,7 @@ const Hero = () => {
                             currentSlide === 0 ? 'text-center lg:text-start' : 'text-center'
                         }`}>
                             <motion.h1 
-                                className='text-midnight_text dark:text-white text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight'
+                                className='text-white text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight drop-shadow-lg'
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3 }}
@@ -208,7 +208,7 @@ const Hero = () => {
                                 Dr. Carlos González
                             </motion.h1>
                             <motion.h2 
-                                className='text-primary dark:text-primary text-xl sm:text-2xl lg:text-3xl font-semibold'
+                                className='text-primary dark:text-primary text-xl sm:text-2xl lg:text-3xl font-semibold drop-shadow-lg'
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.4 }}
@@ -216,7 +216,11 @@ const Hero = () => {
                                 Médico Internista
                             </motion.h2>
                             <motion.p 
-                                className='text-black/70 dark:text-gray-300 text-base sm:text-lg max-w-xl mx-auto lg:mx-0'
+                                className={`text-white/90 dark:text-gray-200 text-base sm:text-lg drop-shadow-lg transition-all duration-1000 ease-in-out ${
+                                    currentSlide === 0 
+                                        ? 'max-w-xl mx-auto lg:mx-0' 
+                                        : 'max-w-2xl mx-auto'
+                                }`}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.5 }}
@@ -261,7 +265,7 @@ const Hero = () => {
 
                         {/* Doctoralia Rating Strip */}
                         <motion.div
-                            className={`flex items-center gap-3 bg-white/80 dark:bg-gray-800/80 p-3 sm:p-4 rounded-xl backdrop-blur-sm shadow-lg border border-gray-100 dark:border-gray-700 mt-2 transition-all duration-1000 ease-in-out ${
+                            className={`flex items-center gap-3 bg-white/90 dark:bg-gray-800/90 p-3 sm:p-4 rounded-xl backdrop-blur-sm shadow-lg border border-gray-100 dark:border-gray-700 mt-2 transition-all duration-1000 ease-in-out ${
                                 currentSlide === 0 ? 'justify-center lg:justify-start' : 'justify-center'
                             }`}
                             initial={{ opacity: 0, y: 20 }}
@@ -282,11 +286,13 @@ const Hero = () => {
                         </motion.div>
                         
                         {/* Stats Section */}
-                        <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-6 sm:pt-8'>
+                        <div className={`grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-6 sm:pt-8 transition-all duration-1000 ease-in-out ${
+                            currentSlide === 0 ? '' : 'max-w-4xl mx-auto'
+                        }`}>
                             {stats.map((stat, index) => (
                                 <motion.div 
                                     key={index}
-                                    className='flex items-center gap-3 bg-white/80 dark:bg-gray-800/80 p-3 sm:p-4 rounded-xl backdrop-blur-sm shadow-lg hover:transform hover:scale-105 transition-all duration-300 justify-center sm:justify-start border border-gray-100 dark:border-gray-700'
+                                    className='flex items-center gap-3 bg-white/90 dark:bg-gray-800/90 p-3 sm:p-4 rounded-xl backdrop-blur-sm shadow-lg hover:transform hover:scale-105 transition-all duration-300 justify-center sm:justify-start border border-gray-100 dark:border-gray-700'
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: stat.delay, duration: 0.6 }}
