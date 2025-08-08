@@ -11,15 +11,15 @@ const Logo: React.FC<LogoProps> = ({ smallVersion = false }) => {
   return (
     <Link href="/" className={smallVersion ? "flex items-center justify-center" : ""}>
       <Image
-        src="/images/logo/logo.png"
+        src="/images/logo/logo_horizontal-removebg-preview.png"
         alt="logo"
-        width={smallVersion ? 40 : 110}
-        height={smallVersion ? 40 : 60}
+        width={smallVersion ? 40 : 1250}
+        height={smallVersion ? 40 : 900}
         style={{ 
           width: "auto", 
           height: "auto",
-          maxWidth: smallVersion ? "40px" : "110px",
-          objectFit: "contain"
+          maxWidth: smallVersion ? "130px" : "400px",
+          objectFit: "cover"
         }}
         quality={100}
       />
