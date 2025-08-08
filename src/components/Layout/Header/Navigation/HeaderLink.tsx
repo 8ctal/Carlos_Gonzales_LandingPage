@@ -68,7 +68,7 @@ const HeaderLink = ({ item, isAtTop = false }: HeaderLinkProps) => {
     >
       <div
         onClick={(e) => handleLinkClick(e, item.href)}
-        className={`flex py-2 text-base font-medium cursor-pointer transition-colors duration-200 ${
+        className={`flex py-2 text-lg font-medium cursor-pointer transition-colors duration-200 uppercase tracking-wide ${
           isAtTop 
             ? 'text-white hover:text-primary drop-shadow-lg' 
             : 'text-dark hover:text-primary dark:text-white dark:hover:text-primary'
@@ -109,7 +109,7 @@ const HeaderLink = ({ item, isAtTop = false }: HeaderLinkProps) => {
                 <div
                   key={index}
                   onClick={(e) => handleSubmenuClick(e, subItem.href)}
-                  className={`block px-4 py-2 text-sm text-dark hover:bg-primary/10 hover:text-primary dark:text-white dark:hover:text-primary cursor-pointer ${
+                  className={`block px-4 py-2 text-sm text-dark hover:bg-primary/10 hover:text-primary dark:text-white dark:hover:text-primary cursor-pointer uppercase tracking-wide ${
                     pathUrl === subItem.href ? "bg-primary/10 text-primary" : ""
                   }`}
                   role="menuitem"

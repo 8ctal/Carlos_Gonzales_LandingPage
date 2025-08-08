@@ -71,7 +71,7 @@ const MobileHeaderLink = ({ item, onClick }: MobileHeaderLinkProps) => {
       <div className="flex items-center justify-between">
         <div
           onClick={(e) => handleLinkClick(e, item.href)}
-          className={`flex-1 text-lg font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary cursor-pointer transition-colors duration-200 ${
+          className={`flex-1 text-xl font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary cursor-pointer transition-colors duration-200 uppercase tracking-wide ${
             pathUrl === item.href ? "text-primary" : ""
           }`}
         >
@@ -118,7 +118,7 @@ const MobileHeaderLink = ({ item, onClick }: MobileHeaderLinkProps) => {
                 <div
                   key={index}
                   onClick={(e) => handleSubmenuClick(e, subItem.href)}
-                  className={`block py-2 text-base text-dark hover:text-primary dark:text-white dark:hover:text-primary transition-colors duration-200 cursor-pointer ${
+                  className={`block py-2 text-lg text-dark hover:text-primary dark:text-white dark:hover:text-primary transition-colors duration-200 cursor-pointer uppercase tracking-wide ${
                     pathUrl === subItem.href ? "text-primary" : ""
                   }`}
                 >
