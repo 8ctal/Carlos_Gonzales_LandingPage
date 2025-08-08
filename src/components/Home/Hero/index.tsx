@@ -3,24 +3,50 @@ import Image from 'next/image';
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-const features = [
+const stats = [
   {
     icon: "solar:calendar-mark-bold",
-    text: "Horarios flexibles",
+    label: "10+ años",
+    sublabel: "de experiencia",
     delay: 0.4
   },
   {
     icon: "solar:shield-check-bold",
-    text: "Atención profesional",
+    label: "1000+",
+    sublabel: "pacientes atendidos",
     delay: 0.5
   },
   {
     icon: "solar:heart-bold",
-    text: "Cuidado integral",
+    label: "Atención",
+    sublabel: "presencial y virtual",
     delay: 0.6
   }
 ];
+
+const backgroundSlides = [
+  "/images/newsletter/bgFile.png",
+  "/images/newsletter/bgFile.png",
+  "/images/newsletter/bgg.png",
+];
+
+const sliderSettings = {
+  dots: false,
+  arrows: false,
+  infinite: true,
+  autoplay: true,
+  autoplaySpeed: 5000,
+  speed: 1000,
+  fade: true,
+  pauseOnHover: false,
+  pauseOnFocus: false,
+  cssEase: "ease-in-out",
+  draggable: false,
+};
 
 const Hero = () => {
     const [isMobile, setIsMobile] = useState(false);
@@ -40,8 +66,33 @@ const Hero = () => {
             id="home-section" 
             className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-white to-slateGray dark:from-gray-900 dark:to-gray-800"
         >
+            {/* Background Slider */}
+            <div className="absolute inset-0 z-0">
+                <div className="w-full h-full">
+                    <Slider {...sliderSettings}>
+                        {backgroundSlides.map((src, idx) => (
+                            <div key={idx} className="outline-none">
+                                <div className="relative w-full h-screen">
+                                    <Image
+                                        src={src}
+                                        alt={`Fondo ${idx + 1}`}
+                                        fill
+                                        priority={idx === 0}
+                                        sizes="100vw"
+                                        style={{ objectFit: 'cover', objectPosition: 'center' }}
+                                        className="w-full h-full"
+                                    />
+                                    {/* Overlay for readability */}
+                                    <div className="absolute inset-0 bg-black/20 dark:bg-black/50" />
+                                </div>
+                            </div>
+                        ))}
+                    </Slider>
+                </div>
+            </div>
+
             {/* Elementos decorativos de fondo */}
-            <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
                 {/* Patrón de puntos */}
                 <div className="absolute w-full h-full opacity-5 dark:opacity-10">
                     <div className="absolute inset-0" 
@@ -80,9 +131,9 @@ const Hero = () => {
             </div>
 
             {/* Sombra unificada para toda la sección inferior */}
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/5 to-transparent dark:from-black/20 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/5 to-transparent dark:from-black/20 pointer-events-none z-20" />
 
-            <div className="container relative mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4 py-20">
+            <div className="container relative mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4 py-20 z-20">
                 <div className='grid grid-cols-1 lg:grid-cols-12 gap-8 items-center'>
                     <motion.div 
                         className='lg:col-span-6 flex flex-col gap-4 sm:gap-6 order-2 lg:order-1'
@@ -90,7 +141,7 @@ const Hero = () => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <div className='flex gap-2 justify-center lg:justify-start mt-4 lg:mt-0'>
+                        <div className='flex gap-2 justify-center lg:justify-start mt-4 lg:mt-0 flex-wrap'>
                             <motion.div
                                 initial={{ scale: 0 }}
                                 animate={{ scale: 1 }}
@@ -102,6 +153,30 @@ const Hero = () => {
                                     className="text-success text-xl inline-block me-2"
                                 />
                                 <p className='text-success text-sm font-semibold'>Medicina Interna</p>
+                            </motion.div>
+                            <motion.div
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ delay: 0.25, type: "spring" }}
+                                className="bg-primary/10 px-4 py-2 rounded-full flex items-center z-10"
+                            >
+                                <Icon
+                                    icon="solar:map-point-bold"
+                                    className="text-primary text-xl inline-block me-2"
+                                />
+                                <p className='text-primary text-sm font-semibold'>Bucaramanga, Colombia</p>
+                            </motion.div>
+                            <motion.div
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ delay: 0.3, type: "spring" }}
+                                className="bg-white/70 dark:bg-gray-800/70 px-4 py-2 rounded-full flex items-center z-10 border border-gray-100 dark:border-gray-700"
+                            >
+                                <Icon
+                                    icon="solar:calendar-mark-bold"
+                                    className="text-midnight_text dark:text-white text-xl inline-block me-2"
+                                />
+                                <p className='text-midnight_text dark:text-white text-sm font-medium'>Citas disponibles esta semana</p>
                             </motion.div>
                         </div>
                         <div className="space-y-3 text-center lg:text-start">
@@ -132,7 +207,7 @@ const Hero = () => {
                         </div>
 
                         <motion.div 
-                            className="relative pt-4 flex justify-center lg:justify-start"
+                            className="relative pt-4 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.6 }}
@@ -149,25 +224,60 @@ const Hero = () => {
                                     className="text-white text-xl transition-transform group-hover:translate-x-1" 
                                 />
                             </a>
+                            <a
+                                href="https://wa.me/573208339347"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 bg-white text-midnight_text border border-green-500 py-3 sm:py-4 px-6 sm:px-8 rounded-full hover:bg-green-500 hover:text-white transition-all duration-300 text-base sm:text-lg font-medium group hover:transform hover:scale-105 shadow-lg hover:shadow-xl dark:bg-gray-800 dark:text-white"
+                            >
+                                <span>WhatsApp</span>
+                                <Icon 
+                                    icon="logos:whatsapp-icon" 
+                                    className="text-xl" 
+                                />
+                            </a>
+                        </motion.div>
+
+                        {/* Doctoralia Rating Strip */}
+                        <motion.div
+                            className="flex items-center justify-center lg:justify-start gap-3 bg-white/80 dark:bg-gray-800/80 p-3 sm:p-4 rounded-xl backdrop-blur-sm shadow-lg border border-gray-100 dark:border-gray-700 mt-2"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.7 }}
+                        >
+                            <Icon icon="simple-icons:doctoralia" className="text-[#00B5DD] text-2xl" />
+                            <div className="flex items-center gap-1">
+                                <Icon icon="solar:star-bold" className="text-yellow-400 text-xl" />
+                                <Icon icon="solar:star-bold" className="text-yellow-400 text-xl" />
+                                <Icon icon="solar:star-bold" className="text-yellow-400 text-xl" />
+                                <Icon icon="solar:star-bold" className="text-yellow-400 text-xl" />
+                                <Icon icon="solar:star-bold" className="text-yellow-400 text-xl" />
+                            </div>
+                            <p className="text-sm sm:text-base text-midnight_text dark:text-white">
+                                4.9 de 5 en Doctoralia · 120+ opiniones
+                            </p>
                         </motion.div>
                         
-                        {/* Features Section */}
+                        {/* Stats Section */}
                         <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-6 sm:pt-8'>
-                            {features.map((feature, index) => (
+                            {stats.map((stat, index) => (
                                 <motion.div 
                                     key={index}
                                     className='flex items-center gap-3 bg-white/80 dark:bg-gray-800/80 p-3 sm:p-4 rounded-xl backdrop-blur-sm shadow-lg hover:transform hover:scale-105 transition-all duration-300 justify-center sm:justify-start border border-gray-100 dark:border-gray-700'
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: feature.delay, duration: 0.6 }}
+                                    transition={{ delay: stat.delay, duration: 0.6 }}
                                 >
                                     <div className="bg-primary/10 dark:bg-primary/20 p-2 sm:p-3 rounded-full flex-shrink-0">
                                         <Icon
-                                            icon={feature.icon}
+                                            icon={stat.icon}
                                             className="text-primary text-xl sm:text-2xl"
                                         />
                                     </div>
-                                    <p className='text-sm sm:text-base font-medium text-midnight_text dark:text-white'>{feature.text}</p>
+                                    <div className='flex flex-col'>
+                                        <p className='text-sm sm:text-base font-semibold text-midnight_text dark:text-white'>{stat.label}</p>
+                                        <p className='text-xs sm:text-sm text-black/70 dark:text-gray-300'>{stat.sublabel}</p>
+                                    </div>
                                 </motion.div>
                             ))}
                         </div>
