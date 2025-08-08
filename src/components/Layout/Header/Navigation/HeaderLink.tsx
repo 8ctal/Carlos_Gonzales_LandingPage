@@ -7,9 +7,10 @@ import { motion, AnimatePresence } from "framer-motion";
 
 interface HeaderLinkProps {
   item: HeaderItem;
+  isAtTop?: boolean;
 }
 
-const HeaderLink = ({ item }: HeaderLinkProps) => {
+const HeaderLink = ({ item, isAtTop = false }: HeaderLinkProps) => {
   const pathUrl = usePathname();
   const [isHovered, setIsHovered] = useState(false);
 
@@ -67,7 +68,11 @@ const HeaderLink = ({ item }: HeaderLinkProps) => {
     >
       <div
         onClick={(e) => handleLinkClick(e, item.href)}
-        className={`flex py-2 text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary cursor-pointer ${
+        className={`flex py-2 text-base font-medium cursor-pointer transition-colors duration-200 ${
+          isAtTop 
+            ? 'text-white hover:text-primary drop-shadow-lg' 
+            : 'text-dark hover:text-primary dark:text-white dark:hover:text-primary'
+        } ${
           pathUrl === item.href ? "text-primary" : ""
         }`}
       >

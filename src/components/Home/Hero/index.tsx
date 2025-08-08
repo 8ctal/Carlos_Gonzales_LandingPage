@@ -10,28 +10,28 @@ import "slick-carousel/slick/slick-theme.css";
 const stats = [
   {
     icon: "solar:calendar-mark-bold",
-    label: "10+ años",
+    label: "3+ años",
     sublabel: "de experiencia",
     delay: 0.4
   },
   {
     icon: "solar:shield-check-bold",
-    label: "1000+",
+    label: "100+",
     sublabel: "pacientes atendidos",
     delay: 0.5
   },
   {
     icon: "solar:heart-bold",
     label: "Atención",
-    sublabel: "presencial y virtual",
+    sublabel: "Presencial",
     delay: 0.6
   }
 ];
 
 const backgroundSlides = [
-  "/images/newsletter/slide1.png",
-  "/images/newsletter/slide2.png",
-  "/images/newsletter/bgFile.png",
+  "/images/newsletter/slide6.png",
+  "/images/newsletter/slide5.png",
+  "/images/newsletter/slide3.jpg",
 ];
 
 const Hero = () => {

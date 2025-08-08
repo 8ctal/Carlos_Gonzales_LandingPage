@@ -19,6 +19,7 @@ const Header = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showHeader, setShowHeader] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const navbarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -35,6 +36,7 @@ const Header = () => {
 
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
+    setScrollY(currentScrollY);
     
     // Only hide header when scrolling down on desktop
     if (!isMobile && currentScrollY > lastScrollY && currentScrollY > 80) {
@@ -77,6 +79,30 @@ const Header = () => {
     };
   }, [navbarOpen]);
 
+  // Calcular opacidad basada en el scroll
+  const getBackgroundOpacity = () => {
+    if (scrollY <= 50) {
+      return 0; // Transparente en la parte superior
+    } else if (scrollY <= 150) {
+      // Transición gradual de 0 a 0.95 entre 50px y 150px de scroll
+      return Math.min((scrollY - 50) / 100, 1) * 0.95;
+    } else {
+      return 0.95; // Opacidad completa después de 150px
+    }
+  };
+
+  const backgroundOpacity = getBackgroundOpacity();
+  const isAtTop = scrollY <= 50;
+
+  // Obtener el color de fondo basado en el tema
+  const getBackgroundColor = () => {
+    if (theme === 'dark') {
+      return `rgba(17, 24, 39, ${backgroundOpacity})`; // gray-900
+    } else {
+      return `rgba(255, 255, 255, ${backgroundOpacity})`; // white
+    }
+  };
+
   if (!mounted) return null;
 
   return (
@@ -89,9 +115,13 @@ const Header = () => {
           height: sticky ? 'auto' : 'auto'
         }}
         transition={{ duration: 0.3 }}
-        className={`fixed top-0 z-40 w-full transition-all duration-300 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm md:block ${
+        className={`fixed top-0 z-40 w-full transition-all duration-300 backdrop-blur-sm md:block ${
           sticky ? "shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)] py-1" : "py-2"
         } ${isMobile ? "hidden" : ""}`}
+        style={{
+          backgroundColor: getBackgroundColor(),
+          backdropFilter: isAtTop ? 'none' : 'blur(8px)',
+        }}
       >
         <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4">
           <div className="relative flex items-center justify-between" ref={navbarRef}>
@@ -101,12 +131,14 @@ const Header = () => {
             
             <div className="hidden lg:flex items-center gap-6">
               {headerData.map((item, index) => (
-                <HeaderLink key={index} item={item} />
+                <HeaderLink key={index} item={item} isAtTop={isAtTop} />
               ))}
               
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="p-2 hover:bg-primary/10 rounded-full transition-colors duration-200 text-dark dark:text-white"
+                className={`p-2 hover:bg-primary/10 rounded-full transition-colors duration-200 ${
+                  isAtTop ? 'text-white hover:bg-white/20' : 'text-dark dark:text-white'
+                }`}
                 aria-label="Toggle dark mode"
               >
                 {theme === "dark" ? (
@@ -131,7 +163,11 @@ const Header = () => {
               opacity: sticky ? 0 : 1
             }}
             transition={{ duration: 0.3 }}
-            className="fixed top-0 z-40 w-full transition-all duration-300 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm md:hidden shadow-[0_4px_20px_rgb(0,0,0,0.08)] dark:shadow-[0_4px_20px_rgb(0,0,0,0.2)]"
+            className="fixed top-0 z-40 w-full transition-all duration-300 backdrop-blur-sm md:hidden shadow-[0_4px_20px_rgb(0,0,0,0.08)] dark:shadow-[0_4px_20px_rgb(0,0,0,0.2)]"
+            style={{
+              backgroundColor: getBackgroundColor(),
+              backdropFilter: isAtTop ? 'none' : 'blur(8px)',
+            }}
           >
             <div className="container mx-auto px-4 py-2">
               <div className="relative flex items-center justify-between">
@@ -142,7 +178,9 @@ const Header = () => {
                 <div className="flex items-center gap-4">
                   <button
                     onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                    className="p-2 hover:bg-primary/10 rounded-full transition-colors duration-200 text-dark dark:text-white"
+                    className={`p-2 hover:bg-primary/10 rounded-full transition-colors duration-200 ${
+                      isAtTop ? 'text-white hover:bg-white/20' : 'text-dark dark:text-white'
+                    }`}
                     aria-label="Toggle dark mode"
                   >
                     {theme === "dark" ? (
@@ -154,7 +192,9 @@ const Header = () => {
                   
                   <button
                     onClick={() => setNavbarOpen(!navbarOpen)}
-                    className="p-2 hover:bg-primary/10 rounded-full transition-colors duration-200 text-dark dark:text-white"
+                    className={`p-2 hover:bg-primary/10 rounded-full transition-colors duration-200 ${
+                      isAtTop ? 'text-white hover:bg-white/20' : 'text-dark dark:text-white'
+                    }`}
                   >
                     <Icon
                       icon={navbarOpen ? "solar:close-circle-bold" : "solar:menu-dots-bold"}
