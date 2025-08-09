@@ -1,15 +1,15 @@
 export const TruestedCompanies: { imgSrc: string }[] = [
   {
-    imgSrc: "/images/companies/cemic.svg"
+    imgSrc: "/images/companies/cemic.png",
   },
   {
-    imgSrc: "/images/companies/favaloro.svg"
+    imgSrc: "/images/companies/favaloro.png",
   },
   {
-    imgSrc: "/images/companies/sanitas.svg"
+    imgSrc: "/images/companies/sanitas.png",
   },
   {
-    imgSrc: "/images/companies/amebpda.svg"
+    imgSrc: "/images/companies/amebpda.svg",
   }
 ]
 

@@ -4,26 +4,53 @@ import { motion } from "framer-motion";
 import Image from 'next/image';
 import Link from 'next/link';
 
-const testimonials = [
+type Testimonial = {
+  name: string;
+  text: string;
+  rating: number;
+  image?: string; // optional: if missing, show letter avatar
+  verified?: boolean;
+  date?: string;
+  location?: string;
+  source?: "doctoralia" | "site";
+};
+
+// Real testimonials (Doctoralia)
+const testimonials: ReadonlyArray<Testimonial> = [
   {
-    name: "María González",
-    image: "/images/testimonial/userone.png",
-    text: "El dr. Carlos es un excelente profesional. Su atención es muy detallada y siempre se toma el tiempo necesario para explicar todo claramente.",
-    rating: 5
+    name: "María Alejandra Gómez",
+    text: "Tuve una excelente experiencia durante mi consulta con el Dr Carlos. Se tomó el tiempo necesario para escucharme, responder todas mis preguntas y explicarme el diagnóstico y tratamiento. Lo recomiendo!",
+    rating: 5,
+    verified: true,
+    date: "8 de junio de 2025",
+    location: "Dr. Carlos González, médico internista - consulta virtual • Otro",
+    source: "doctoralia",
   },
   {
-    name: "Carlos Rodríguez",
-    image: "/images/testimonial/usertwo.png",
-    text: "Muy satisfecho con la atención recibida. El diagnóstico fue preciso y el tratamiento efectivo. Recomiendo ampliamente sus servicios.",
-    rating: 5
+    name: "Marta Olarte",
+    text: "Gracias doctor por la forma tan clara de ayudarme a bajar de peso! Por fin logré entender mi relación con la alimentación y empecé a estar mejor.",
+    rating: 5,
+    verified: true,
+    date: "8 de junio de 2025",
+    location: "Centro médico Clínica Bucaramanga • Visita Medicina Interna",
+    source: "doctoralia",
   },
   {
-    name: "Ana Martínez",
-    image: "/images/testimonial/userthree.png",
-    text: "Excelente doctor, muy profesional y empático. El consultorio es moderno y cómodo. La atención del personal es de primera.",
-    rating: 5
-  }
+    name: "Camila Andre Ribero",
+    text: "Lo que más destaco de su atención es su capacidad de escucha, su claridad al explicar cada diagnóstico y tratamiento, y su empatía en momentos en que uno más necesita comprensión. Nunca escatimó tiempo ni esfuerzo para asegurarse de que yo entendiera cada paso del proceso médico y siempre me hizo sentir acompañado en cada etapa.",
+    rating: 5,
+    verified: true,
+    date: "14 de mayo de 2025",
+    location: "Centro médico Clínica Bucaramanga • Visita Medicina Interna",
+    source: "doctoralia",
+  },
 ];
+
+const getInitial = (fullName: string): string => {
+  const trimmed = fullName?.trim() ?? "";
+  if (trimmed.length === 0) return "?";
+  return trimmed.charAt(0).toUpperCase();
+};
 
 const Testimonials = () => {
   return (
@@ -47,21 +74,27 @@ const Testimonials = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <motion.div
-              key={index}
+              key={`${testimonial.name}-${index}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
               className="bg-slateGray dark:bg-gray-800 rounded-2xl p-8 relative"
             >
               <div className="absolute -top-6 left-8">
-                <div className="relative w-16 h-16 rounded-full overflow-hidden border-4 border-white dark:border-gray-800">
-                  <Image
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    fill
-                    style={{ objectFit: 'cover' }}
-                  />
+                <div className="relative w-16 h-16 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 bg-white dark:bg-gray-700 flex items-center justify-center">
+                  {testimonial.image ? (
+                    <Image
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                    />
+                  ) : (
+                    <span className="text-lg font-semibold text-midnight_text dark:text-white">
+                      {getInitial(testimonial.name)}
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -82,6 +115,21 @@ const Testimonials = () => {
               <p className="text-midnight_text dark:text-white font-semibold">
                 {testimonial.name}
               </p>
+
+              {(testimonial.verified || testimonial.date || testimonial.location) && (
+                <div className="mt-2 text-xs text-black/60 dark:text-gray-300/80 space-y-1">
+                  {testimonial.verified && (
+                    <div className="flex items-center gap-1">
+                      <Icon icon="solar:shield-check-bold" className="text-success" />
+                      <span>Número de teléfono verificado</span>
+                    </div>
+                  )}
+                  {testimonial.date && <div>{testimonial.date}</div>}
+                  {testimonial.location && (
+                    <div className="opacity-80">{testimonial.location}</div>
+                  )}
+                </div>
+              )}
             </motion.div>
           ))}
         </div>
@@ -110,3 +158,4 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
+

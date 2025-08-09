@@ -27,29 +27,31 @@ const conditions: ReadonlyArray<string> = [
 
 const Services = () => {
   return (
-    <FixedBgSection
-      id="services"
-      bgImage="/images/newsletter/gradient2.png"
-      className="pt-24 pb-16"
-      innerClassName="py-12"
-      topWave
-      backgroundMode="band"
-      bandHeightPercent={50}
-    >
-      {/* Animated background: subtle dot grid */}
+    <FixedBgSection id="services" className="pt-24 pb-16" innerClassName="py-12" topWave>
+      {/* Light mode grid */}
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06] dark:opacity-[0.09] rounded-3xl"
+        className="pointer-events-none absolute inset-0 -z-10 rounded-3xl dark:hidden"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 1px 1px, rgba(0,0,0,0.6) 1px, transparent 0)",
-          backgroundSize: "26px 26px",
+            "radial-gradient(circle at 1.3px 1.3Spx, rgba(30, 68, 240, 0.96) 1.0px, transparent 0)",
+          backgroundSize: "22px 22px",
         }}
-        animate={{ backgroundPosition: ["0px 0px", "26px 26px", "0px 0px"] }}
+        animate={{ backgroundPosition: ["0px 0px", "22px 22px", "0px 0px"] }}
         transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
       />
-
-      {/* Animated background: moving light beam */}
+      {/* Dark mode grid */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 rounded-3xl hidden dark:block"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 1.5px 1.5px, rgba(255,255,255,0.22) 1.5px, transparent 0)",
+          backgroundSize: "22px 22px",
+        }}
+        animate={{ backgroundPosition: ["0px 0px", "22px 22px", "0px 0px"] }}
+        transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+      />
       <motion.div
         aria-hidden
         className="pointer-events-none absolute top-1/3 -left-1/3 h-64 w-2/3 -z-10 rotate-12 bg-gradient-to-r from-transparent via-primary/15 to-transparent dark:via-primary/25 blur-2xl"

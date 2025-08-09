@@ -4,7 +4,7 @@ type BackgroundMode = "full" | "band";
 
 interface FixedBgSectionProps {
   id?: string;
-  bgImage: string;
+  bgImage?: string; // optional
   className?: string;
   innerClassName?: string;
   children: React.ReactNode;
@@ -30,7 +30,7 @@ export function FixedBgSection({
   bandHeightPercent = 60,
 }: FixedBgSectionProps) {
   const isBand = backgroundMode === "band";
-  const bandInlineStyle: React.CSSProperties | undefined = isBand
+  const bandInlineStyle: React.CSSProperties | undefined = bgImage && isBand
     ? (bandHeightPercent >= 100
         ? { top: 0, height: '100%' }
         : { top: '50%', transform: 'translateY(-50%)', height: `${bandHeightPercent}%` })
@@ -38,15 +38,17 @@ export function FixedBgSection({
 
   return (
     <section id={id} className={`relative ${className}`}>
-      {/* Fixed background layer */}
-      <div
-        className={`absolute -z-10 bg-fixed bg-cover bg-center ${isBand ? "left-0 right-0" : "inset-0"}`}
-        style={{ backgroundImage: `url(${bgImage})`, ...(bandInlineStyle ?? {}) }}
-        aria-hidden
-      >
-        {/* subtle darken for readability inside the band */}
-        <div className="absolute inset-0 bg-black/10 dark:bg-black/20" />
-      </div>
+      {/* Fixed background layer (optional) */}
+      {bgImage && (
+        <div
+          className={`absolute -z-10 bg-fixed bg-cover bg-center ${isBand ? "left-0 right-0" : "inset-0"}`}
+          style={{ backgroundImage: `url(${bgImage})`, ...(bandInlineStyle ?? {}) }}
+          aria-hidden
+        >
+          {/* subtle darken for readability inside the band */}
+          <div className="absolute inset-0 bg-black/10 dark:bg-black/20" />
+        </div>
+      )}
 
       {/* top fade to soften transition with previous section */}
       <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-white to-transparent dark:from-gray-900" aria-hidden />

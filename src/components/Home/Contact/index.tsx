@@ -240,8 +240,8 @@ const Contact = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <div className="bg-white dark:bg-gray-900 p-4 sm:p-6 rounded-xl shadow-md">
-              <h3 className="text-base sm:text-lg font-semibold text-midnight_text dark:text-white mb-4">
+            <div className="bg-white dark:bg-gray-900 p-4 sm:p-6 rounded-xl shadow-md space-y-4">
+              <h3 className="text-base sm:text-lg font-semibold text-midnight_text dark:text-white">
                 Horario de atención
               </h3>
               <div className="space-y-3">
@@ -258,6 +258,38 @@ const Contact = () => {
                   <span>Cerrado</span>
                 </div>
               </div>
+
+              {/* Clinic photo */}
+              <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden border border-gray-100 dark:border-gray-800">
+                <img
+                  src="/images/newsletter/clinica.jpg"
+                  alt="Centro médico Clínica Bucaramanga"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Embedded Google Map */}
+              <div className="relative w-full h-56 sm:h-64 rounded-lg overflow-hidden border border-gray-100 dark:border-gray-800">
+                <iframe
+                  title="Ubicación del consultorio"
+                  src="https://www.google.com/maps?q=Calle+54+%23+33+-+45+Cons+404,+Centro+m%C3%A9dico+Clinica+Bucaramanga&output=embed"
+                  width="100%"
+                  height="100%"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+
+              <a
+                href="https://www.google.com/maps?q=Calle+54+%23+33+-+45+Cons+404,+Centro+m%C3%A9dico+Clinica+Bucaramanga"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-primary hover:text-secondary transition-colors text-sm"
+              >
+                Ver en Google Maps
+                <Icon icon="solar:map-arrow-right-bold" />
+              </a>
             </div>
           </motion.div>
         </div>
