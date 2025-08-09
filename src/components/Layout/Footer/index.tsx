@@ -67,7 +67,7 @@ const Footer = () => {
         >
           <Logo />
           <p className="mt-4 text-white/80 text-center max-w-md">
-            Comprometidos con su salud y bienestar, brindando atención médica especializada y personalizada.
+            Comprometido con su salud y bienestar, brindando atención médica especializada y personalizada.
           </p>
         </motion.div>
 
@@ -161,7 +161,7 @@ const Footer = () => {
           <motion.div variants={itemAnimation}>
             <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
               <Icon icon="solar:share-circle-bold" className="text-2xl" />
-              Síguenos
+              Sígueme
             </h3>
             <div className="flex gap-4">
               {socialLinks.map((social, index) => (
