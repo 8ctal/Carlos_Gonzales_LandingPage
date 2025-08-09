@@ -2,156 +2,162 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import FixedBgSection from "@/components/Section/FixedBgSection";
 
-const services = [
-  {
-    icon: "solar:stethoscope-bold",
-    title: "Consulta General",
-    description: "Evaluación integral de su salud con atención personalizada y enfoque preventivo.",
-    id: "general",
-    details: "Nuestro servicio de consulta general ofrece una evaluación completa de su salud, incluyendo exámenes físicos, diagnóstico y tratamiento de condiciones comunes."
-  },
-  {
-    icon: "solar:heart-pulse-bold",
-    title: "Especialidades",
-    description: "Atención especializada en diferentes áreas de la medicina para un cuidado completo.",
-    id: "specialties",
-    details: "Contamos con ... áreas para brindarle la atención específica que necesita."
-  },
-  {
-    icon: "solar:hospital-bold",
-    title: "Procedimientos",
-    description: "Procedimientos médicos realizados con la más alta tecnología y estándares de calidad.",
-    id: "procedures",
-    details: "Realizamos diversos procedimientos médicos con equipos de última generación y siguiendo los más altos estándares de seguridad y calidad."
-  },
-  {
-    icon: "solar:calendar-mark-bold",
-    title: "Citas Online",
-    description: "Reserve su cita de manera fácil y rápida a través de nuestro sistema en línea.",
-    id: "appointments",
-    details: "Nuestro sistema de citas en línea le permite programar su consulta de manera conveniente, eligiendo el horario que mejor se adapte a su agenda."
-  }
+const conditions: ReadonlyArray<string> = [
+  "Evaluación prequirúrgica",
+  "Hipertensión arterial",
+  "Diabetes mellitus",
+  "Obesidad",
+  "Dislipidemia",
+  "Hipotiroidismo",
+  "Hipertiroidismo",
+  "Dolor abdominal",
+  "Enfermedad hepática",
+  "Insuficiencia renal aguda y crónica",
+  "Pérdida no deseada de peso",
+  "Gastritis aguda y crónica",
+  "Dolor articular",
+  "Fibromialgia",
+  "Lupus eritematoso",
+  "Arritmias",
+  "Anticoagulación",
+  "Embolia pulmonar / Trombosis venosa profunda",
 ];
 
 const Services = () => {
   return (
-    <>
-      <section id="services" className="bg-white dark:bg-gray-900 py-20">
-        <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+    <FixedBgSection
+      id="services"
+      bgImage="/images/newsletter/gradient2.png"
+      className="pt-24 pb-16"
+      innerClassName="py-12"
+      topWave
+      backgroundMode="band"
+      bandHeightPercent={50}
+    >
+      {/* Animated background: subtle dot grid */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06] dark:opacity-[0.09] rounded-3xl"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 1px 1px, rgba(0,0,0,0.6) 1px, transparent 0)",
+          backgroundSize: "26px 26px",
+        }}
+        animate={{ backgroundPosition: ["0px 0px", "26px 26px", "0px 0px"] }}
+        transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+      />
+
+      {/* Animated background: moving light beam */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute top-1/3 -left-1/3 h-64 w-2/3 -z-10 rotate-12 bg-gradient-to-r from-transparent via-primary/15 to-transparent dark:via-primary/25 blur-2xl"
+        animate={{ x: ["-20%", "120%"] }}
+        transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+      />
+
+      {/* Content */}
+      <div className="relative">
+        <motion.div
+          className="mx-auto max-w-3xl text-center mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <motion.div
+            initial={{ y: 0 }}
+            animate={{ y: [0, -3, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="inline-flex items-center gap-2 rounded-full bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300 px-4 py-1.5 mb-4"
           >
-            <h2 className="text-3xl md:text-4xl font-semibold text-midnight_text dark:text-white mb-4">
-              Nuestros Servicios
-            </h2>
-            <p className="text-black/70 dark:text-gray-300 text-lg max-w-2xl mx-auto">
-              Ofrecemos una amplia gama de servicios médicos especializados para cuidar de su salud y bienestar
-            </p>
+            <span className="inline-block h-2 w-2 rounded-full bg-green-500" />
+            <span className="text-sm font-semibold">Consulta presencial</span>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-slateGray dark:bg-gray-800 rounded-2xl p-6 hover:shadow-lg transition-shadow duration-300"
-              >
-                <div className="bg-primary/10 dark:bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                  <Icon 
-                    icon={service.icon}
-                    className="text-primary text-3xl"
-                  />
-                </div>
-                <h3 className="text-xl font-semibold text-midnight_text dark:text-white mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-black/70 dark:text-gray-300 mb-4">
-                  {service.description}
-                </p>
-                <Link 
-                  href={`#${service.id}`}
-                  className="inline-flex items-center text-primary hover:text-secondary transition-colors duration-300"
-                >
-                  Saber más
-                  <Icon 
-                    icon="solar:arrow-right-bold"
-                    className="ml-2"
-                  />
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+          <h2 className="text-3xl md:text-4xl font-semibold text-midnight_text dark:text-white">
+            Atención especializada para tus necesidades
+          </h2>
+          <p className="mt-3 text-black/80 dark:text-gray-200 text-lg">
+            Evalúo, diagnostico y trato principalmente estas condiciones en adultos, con enfoque integral.
+          </p>
 
-          <motion.div 
-            className="text-center mt-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-          >
-            <Link 
+          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
               href="#contact"
-              className="inline-flex items-center justify-center px-8 py-4 bg-primary text-white rounded-full hover:bg-secondary transition-colors duration-300 text-lg font-medium"
+              className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white rounded-full hover:bg-secondary transition-colors duration-300 text-base font-medium shadow-lg hover:shadow-xl"
             >
               Agendar una cita
-              <Icon 
-                icon="solar:calendar-add-bold"
-                className="ml-2 text-xl"
-              />
+              <Icon icon="solar:calendar-add-bold" className="ml-2 text-lg" />
             </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {services.map((service, index) => (
-        <section 
-          key={service.id} 
-          id={service.id} 
-          className={`py-16 ${index % 2 === 0 ? 'bg-slateGray dark:bg-gray-800' : 'bg-white dark:bg-gray-900'}`}
-        >
-          <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="max-w-3xl mx-auto text-center"
+            <a
+              href="https://wa.me/573208339347"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-green-500 text-green-600 hover:bg-green-500 hover:text-white transition-colors duration-300 text-base font-medium shadow-lg hover:shadow-xl dark:text-green-400"
             >
-              <div className="bg-primary/10 dark:bg-primary/20 w-20 h-20 rounded-full flex items-center justify-center mb-6 mx-auto">
-                <Icon 
-                  icon={service.icon}
-                  className="text-primary text-4xl"
-                />
-              </div>
-              <h2 className="text-3xl md:text-4xl font-semibold text-midnight_text dark:text-white mb-6">
-                {service.title}
-              </h2>
-              <p className="text-black/70 dark:text-gray-300 text-lg mb-8">
-                {service.details}
-              </p>
-              <Link 
-                href="#contact"
-                className="inline-flex items-center justify-center px-8 py-4 bg-primary text-white rounded-full hover:bg-secondary transition-colors duration-300 text-lg font-medium"
-              >
-                Agendar una cita
-                <Icon 
-                  icon="solar:calendar-add-bold"
-                  className="ml-2 text-xl"
-                />
-              </Link>
-            </motion.div>
+              WhatsApp
+              <Icon icon="logos:whatsapp-icon" className="ml-2 text-lg" />
+            </a>
           </div>
-        </section>
-      ))}
-    </>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mx-auto max-w-5xl"
+        >
+          <div className="relative">
+            {/* Sweep highlight over grid */}
+            <motion.div
+              aria-hidden
+              className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-white/30 to-transparent dark:via-white/10 blur-2xl"
+              animate={{ x: ["-10%", "130%"] }}
+              transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
+            />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-4">
+              {conditions.map((item, idx) => (
+                <motion.div
+                  key={item}
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, delay: 0.02 * idx }}
+                  className="group relative overflow-hidden rounded-xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm border border-white/40 dark:border-white/10 p-4 hover:shadow-md transition-all duration-300 hover:-translate-y-0.5"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 dark:bg-primary/20">
+                      <Icon icon="solar:check-circle-bold" className="text-primary text-lg" />
+                    </div>
+                    <p className="text-midnight_text dark:text-white text-base font-medium leading-snug">
+                      {item}
+                    </p>
+                  </div>
+
+                  <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0" />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="mt-10 mx-auto max-w-3xl rounded-2xl bg-white/70 dark:bg-gray-900/60 backdrop-blur-sm p-6 text-center border border-white/40 dark:border-white/10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <p className="text-black/80 dark:text-gray-100">
+            Si tienes dudas sobre tus síntomas o no ves tu diagnóstico listado, con gusto te orientaré durante la consulta.
+          </p>
+        </motion.div>
+      </div>
+    </FixedBgSection>
   );
 };
 

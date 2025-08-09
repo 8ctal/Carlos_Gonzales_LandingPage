@@ -171,11 +171,11 @@ const Header = () => {
           >
             <div className="container mx-auto px-4 py-2">
               <div className="relative flex items-center justify-between">
-                <div className="w-44 max-w-full">
+                <div className="w-36 sm:w-44 max-w-full">
                   <Logo />
                 </div>
                 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 flex-shrink-0">
                   <button
                     onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                     className={`p-2 hover:bg-primary/10 rounded-full transition-colors duration-200 ${

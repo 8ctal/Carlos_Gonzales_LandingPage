@@ -5,6 +5,7 @@ import About from "@/components/Home/About";
 import Testimonials from "@/components/Home/Testimonials";
 import Contact from "@/components/Home/Contact";
 import { Metadata } from "next";
+import Experience from "@/components/Home/Experience";
 
 export const metadata: Metadata = {
   title: 'Dr. Carlos González - Médico Internista',
@@ -15,6 +16,7 @@ export default function Home() {
     <main>
       <Hero />
       <Services />
+      <Experience />
       <About />
       <Testimonials />
       <Contact />

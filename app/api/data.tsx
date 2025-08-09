@@ -1,27 +1,15 @@
 export const TruestedCompanies: { imgSrc: string }[] = [
   {
-    imgSrc: "/images/companies/airbnb.svg"
+    imgSrc: "/images/companies/cemic.svg"
   },
   {
-    imgSrc: "/images/companies/fedex.svg"
+    imgSrc: "/images/companies/favaloro.svg"
   },
   {
-    imgSrc: "/images/companies/google.svg"
+    imgSrc: "/images/companies/sanitas.svg"
   },
   {
-    imgSrc: "/images/companies/hubspot.svg"
-  },
-  {
-    imgSrc: "/images/companies/microsoft.svg"
-  },
-  {
-    imgSrc: "/images/companies/walmart.svg"
-  },
-  {
-    imgSrc: "/images/companies/airbnb.svg"
-  },
-  {
-    imgSrc: "/images/companies/fedex.svg"
+    imgSrc: "/images/companies/amebpda.svg"
   }
 ]
 

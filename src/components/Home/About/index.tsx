@@ -7,7 +7,7 @@ import TextSlider from './TextSlider';
 
 const About = () => {
   return (
-    <section id="about" className="bg-slateGray dark:bg-gray-800 py-20">
+    <section id="about" className="bg-slate-200 dark:bg-gray-800 py-20">
       <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div

@@ -154,7 +154,7 @@ const Hero = () => {
                         }}
                         transition={{ duration: 0.8 }}
                     >
-                        <div className={`flex gap-2 mt-11 lg:mt-0 md:mt-5 flex-wrap transition-all duration-1000 ease-in-out ${
+                        <div className={`flex gap-2 mt-11 lg:mt-10 md:mt-7 flex-wrap transition-all duration-1000 ease-in-out ${
                             currentSlide === 0 
                                 ? 'justify-center lg:justify-start' 
                                 : 'justify-center'
@@ -169,7 +169,7 @@ const Hero = () => {
                                     icon="solar:verified-check-bold"
                                     className="text-success text-xl inline-block me-2"
                                 />
-                                <p className='text-success text-sm font-semibold'>Medicina Interna</p>
+                                <p className='text-success text-sm lg:text-xl font-semibold'>Consulta personalizada</p>
                             </motion.div>
                             <motion.div
                                 initial={{ scale: 0 }}
@@ -181,7 +181,7 @@ const Hero = () => {
                                     icon="solar:map-point-bold"
                                     className="text-primary text-xl inline-block me-2"
                                 />
-                                <p className='text-primary text-sm font-semibold'>Bucaramanga, Colombia</p>
+                                <p className='text-primary text-sm lg:text-xl font-semibold'>Bucaramanga, Colombia</p>
                             </motion.div>
                             <motion.div
                                 initial={{ scale: 0 }}
