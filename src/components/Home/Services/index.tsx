@@ -34,7 +34,7 @@ const Services = () => {
         className="pointer-events-none absolute inset-0 -z-10 rounded-3xl dark:hidden"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 1.3px 1.3Spx, rgba(30, 68, 240, 0.96) 1.0px, transparent 0)",
+            "radial-gradient(circle at 1.5px 1.5px, rgba(109, 131, 228, 0.35) 1.5px, transparent 0)",
           backgroundSize: "22px 22px",
         }}
         animate={{ backgroundPosition: ["0px 0px", "22px 22px", "0px 0px"] }}
