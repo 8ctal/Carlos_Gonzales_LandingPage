@@ -9,7 +9,7 @@ export const TruestedCompanies: { imgSrc: string }[] = [
     imgSrc: "/images/companies/sanitas.png",
   },
   {
-    imgSrc: "/images/companies/amebpda.svg",
+    imgSrc: "/images/companies/amebpda.png",
   }
 ]
 

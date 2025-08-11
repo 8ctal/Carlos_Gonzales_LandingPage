@@ -7,7 +7,7 @@ import TextSlider from './TextSlider';
 
 const About = () => {
   return (
-    <section id="about" className="bg-slate-200 dark:bg-gray-800 py-20">
+    <section id="about" className="bg-slate-100 dark:bg-gray-800 py-20">
       <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -36,7 +36,7 @@ const About = () => {
                 src="/images/banner/doctorCarlos-Photoroom.png"
                 alt="Doctor profile"
                 fill
-                style={{ 
+                style={{
                   objectFit: 'cover',
                   objectPosition: 'center 30%',
                   transform: 'scale(1.2)'
@@ -45,46 +45,47 @@ const About = () => {
                 priority
               />
 
-              {/* University badge with hover glow */}
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="absolute bottom-4 left-4 rounded-xl"
-              >
-                <div className="relative group/unab">
-                  <div
-                    className="absolute -inset-1 rounded-xl blur-md opacity-0 group-hover/unab:opacity-100 transition-opacity duration-300"
-                    aria-hidden
-                    style={{ background: "radial-gradient(60% 80% at 30% 50%, rgba(251, 154, 35, 0.9) 0%, rgba(245, 159, 11, 0.95) 60%, transparent 100%)" }}
+
+            </div>
+            {/* University badge with hover glow */}
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="absolute -bottom-2 left-1 rounded-xl lg:-left-1 lg:-bottom-16 "
+            >
+              <div className="relative group/unab">
+                <div
+                  className="absolute -inset-2 rounded-xl blur-md opacity-0 group-hover/unab:opacity-100 transition-opacity duration-300"
+                  aria-hidden
+                  style={{ background: "radial-gradient(60% 80% at 30% 50%, rgba(251, 154, 35, 0.9) 0%, rgba(245, 159, 11, 0.95) 60%, transparent 100%)" }}
+                />
+                <div className="relative bg-white/90 dark:bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-md border border-white/40 dark:border-white/10 px-3 py-2 flex items-center gap-3">
+                  <Image
+                    src="/images/logo/logo-u-vig.png"
+                    alt="Universidad Autónoma de Bucaramanga"
+                    width={100}
+                    height={30}
+                    className="object-contain"
                   />
-                  <div className="relative bg-white/90 dark:bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-md border border-white/40 dark:border-white/10 px-3 py-2 flex items-center gap-3">
-                    <Image
-                      src="/images/logo/logo-u-vig.png"
-                      alt="Universidad Autónoma de Bucaramanga"
-                      width={80}
-                      height={24}
-                      className="object-contain"
-                    />
-                    <div className="hidden sm:block">
-                      <p className="text-xs font-semibold text-midnight_text dark:text-white leading-tight">
-                        Universidad Autónoma de Bucaramanga
-                      </p>
-                      <p className="text-[10px] text-black/70 dark:text-gray-300">Vigilada Mineducación</p>
-                    </div>
+                  <div className="hidden sm:block">
+                    <p className="text-md font-semibold text-midnight_text dark:text-white leading-tight">
+                      <span className="block">Universidad Autónoma</span>
+                      <span className="block">De Bucaramanga</span>
+                    </p>
                   </div>
                 </div>
-              </motion.div>
-            </div>
-            
+              </div>
+            </motion.div>
+
             {/* Specialization institution badge (bottom-right) */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="absolute -bottom-6 -right-6 rounded-2xl max-w-[260px]"
+              className="absolute -bottom-6 -right-4 rounded-2xl lg:-bottom-20 lg:-right-10 max-w-[260px]"
             >
               <div className="relative group/favaloro">
                 <div
@@ -137,7 +138,7 @@ const About = () => {
                     Educación
                   </h4>
                   <p className="text-black/70 dark:text-gray-300">
-                  Universidad Autónoma de Bucaramanga
+                    Universidad Autónoma de Bucaramanga
                   </p>
                 </div>
               </div>
@@ -167,12 +168,12 @@ const About = () => {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="mt-8"
             >
-              <Link 
+              <Link
                 href="#contact"
                 className="inline-flex items-center justify-center px-8 py-4 bg-primary text-white rounded-full hover:bg-secondary transition-colors duration-300 text-lg font-medium"
               >
                 Agendar Consulta
-                <Icon 
+                <Icon
                   icon="solar:calendar-add-bold"
                   className="ml-2 text-xl"
                 />

@@ -104,8 +104,8 @@ const Experience = () => {
           <Slider {...logoSettings}>
             {TruestedCompanies.map((item, i) => (
               <div key={i} className="px-4">
-                <div className="flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity">
-                  <Image src={item.imgSrc} alt={`logo-${i}`} width={140} height={40} />
+                <div className="flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity w-full h-full">
+                  <Image src={item.imgSrc} alt={`logo-${i}`} width={140} height={140} />
                 </div>
               </div>
             ))}

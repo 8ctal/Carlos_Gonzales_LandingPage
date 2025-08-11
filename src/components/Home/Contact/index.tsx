@@ -20,8 +20,8 @@ const contactInfo = [
   {
     icon: "solar:letter-bold",
     title: "Email",
-    info: "dr.gonzalez.mir@gmail.com",
-    link: "mailto:dr.gonzalez.mir@gmail.com"
+    info: "dr.carlos.gonzalez.mir@gmail.com",
+    link: "mailto:dr.carlos.gonzalez.mir@gmail.com"
   }
 ];
 

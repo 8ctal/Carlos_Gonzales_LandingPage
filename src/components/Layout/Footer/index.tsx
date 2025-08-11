@@ -87,7 +87,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start gap-2 text-white/80 hover:text-white transition-colors duration-300">
                 <Icon icon="solar:letter-bold" className="text-lg mt-1" />
-                <a href="mailto:dr.gonzalez.mir@gmail.com" className="hover:underline">dr.gonzalez.mir@gmail.com</a>
+                <a href="mailto:dr.gonzalez.mir@gmail.com" className="hover:underline">dr.carlos.gonzalez.mir@gmail.com</a>
               </li>
               <li className="flex items-start gap-2 text-white/80 hover:text-white transition-colors duration-300">
                 <Icon icon="solar:map-point-bold" className="text-lg mt-1" />
