@@ -69,9 +69,10 @@ function CountUp({ to, durationMs = 1200 }: { to: number; durationMs?: number })
 }
 
 const backgroundSlides = [
-  "/images/newsletter/slide6.png",
+  "/images/banner/slide10.png",
   "/images/newsletter/slide5.png",
   "/images/banner/bannerAtent.jpg",
+  "/images/newsletter/slide6.png",
 ];
 
 const Hero = () => {
@@ -216,7 +217,7 @@ const Hero = () => {
             </motion.div>
 
             {/* Imagen del doctor - solo se muestra en el primer slide con transición suave */}
-            {currentSlide === 0 && (
+            {(currentSlide === 0 || currentSlide === 3) && (
               <motion.div
                 className='order-2 lg:col-span-6 lg:order-2 relative'
                 initial={{ opacity: 0, scale: 0.8, x: 50 }}
